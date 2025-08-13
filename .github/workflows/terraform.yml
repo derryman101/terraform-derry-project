@@ -56,5 +56,5 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           echo "Starting Terraform apply at $(date)"
-          terraform apply tfplan -parallelism=2 -no-color
+          terraform apply -parallelism=2 -no-color tfplan
           echo "Terraform apply completed at $(date)"
