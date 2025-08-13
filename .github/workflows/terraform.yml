@@ -49,12 +49,12 @@ jobs:
         run: |
           echo "Starting Terraform plan at $(date)"
           # Use timeout and reduced parallelism to handle GitHub Actions network issues
-          timeout 300 terraform plan -out=tfplan -refresh=false -parallelism=2 -no-color
+          timeout 300 terraform plan -out=tfplan -refresh=false -parallelism=2 -no-color -var="instance_ami=ami-0c02fb55956c7d316"
           echo "Terraform plan completed at $(date)"
         
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           echo "Starting Terraform apply at $(date)"
-          terraform apply -auto-approve tfplan -parallelism=2 -no-color
+          terraform apply tfplan -parallelism=2 -no-color
           echo "Terraform apply completed at $(date)"
